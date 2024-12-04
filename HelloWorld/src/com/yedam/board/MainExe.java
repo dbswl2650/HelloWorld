@@ -8,9 +8,10 @@ public class MainExe {
 	static BoardExe bexe = new BoardExe(); // 필드.
 
 	public static void main(String[] args) {
+		
 		boolean run = true;
 
-		MemberExe mexe = new MemberExe(); // 인스턴스.
+//		MemberExe mexe = new MemberExe(); // 인스턴스.
 
 		while (run) {
 			System.out.println("1.회원등록 2.목록 3.게시판 9.종료");
