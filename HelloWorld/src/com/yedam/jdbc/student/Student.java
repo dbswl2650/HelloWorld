@@ -1,5 +1,8 @@
 package com.yedam.jdbc.student;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /*
  * tbl_student의 칼럼을 필드로 선언.
  * std_no => stdNo;
@@ -24,8 +27,15 @@ public class Student {
 	private String stdPhone;
 	private int engScore;
 	private int mathScore;
-	private int sumValue;
-
+	private Date creationDate;
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	
 	public String getStdNo() {
 		return stdNo;
 	}
@@ -65,18 +75,16 @@ public class Student {
 	public void setMathScore(int mathScore) {
 		this.mathScore = mathScore;
 	}
-
-	public int getSumValue() {
-		return sumValue;
-	}
-
-	public void setSumValue(int sumValue) {
-		this.sumValue = sumValue;
-	}
 	
 	// 목록으로 출력.
 	public String showInfo() {
-		return " " + stdNo + "  " + stdName + " " + stdPhone + "  " + engScore + " " + mathScore;
+		// Date -> 출력포멧.
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String cdate = sdf.format(creationDate);
+		
+		return " " + stdNo + "  " + stdName + " "//
+				+ stdPhone + "  " + engScore + " " + mathScore
+				+ "  " + cdate;
 	}
 	
 	// 상세화면 출력.
