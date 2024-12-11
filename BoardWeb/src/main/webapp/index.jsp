@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <jsp:forward page="boardList.do"></jsp:forward>
   <%
   // 주석처리.
   String msg = "Hello";

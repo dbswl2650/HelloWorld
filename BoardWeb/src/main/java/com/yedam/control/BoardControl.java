@@ -20,7 +20,7 @@ public class BoardControl implements Control {
 			// 파라미터(board_no);
 			String bno = req.getParameter("board_no");
 			BoardVO bvo = bdao.selectBoard(Integer.parseInt(bno));
-
+			System.out.println(bvo);
 			req.setAttribute("board", bvo);
 			req.getRequestDispatcher("html/board.jsp").forward(req, resp);
 			
@@ -37,7 +37,7 @@ public class BoardControl implements Control {
 			
 			if(bdao.insertBoard(board)) {
 				//목록이동.
-				resp.sendRedirect("boardList.do");
+				resp.sendRedirect("boardList.do"); // 페이지재지정.
 			} else {
 				// 등록화면으로 이동.
 				req.getRequestDispatcher("html/boardForm.jsp").forward(req, resp);

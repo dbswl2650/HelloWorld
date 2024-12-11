@@ -24,13 +24,24 @@
 			<div class="list-group list-group-flush">
 				<a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="boardList.do">게시글 목록</a> <a
+					href="boardList.do">게시글 목록</a>  <a
+					<%
+						String logId = (String) session.getAttribute("logId");
+						if(logId == null) {
+					%>
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="boardForm.do">게시글 등록</a> <a
+					href="loginForm.do">로그인</a>
+					<%
+						} else {
+					%> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Overview</a> <a
+					href="boardForm.do">게시글 등록</a><a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Events</a> <a
+					href="logout.do">로그아웃(<%=logId %>)</a> 
+					<%
+						}
+					%> <a
+					
 					class="list-group-item list-group-item-action list-group-item-light p-3"
 					href="#!">Profile</a> <a
 					class="list-group-item list-group-item-action list-group-item-light p-3"
