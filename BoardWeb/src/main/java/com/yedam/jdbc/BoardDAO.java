@@ -151,7 +151,7 @@ public class BoardDAO extends DAO {
 		return false;
 	}
 
-	// 목록.
+	// 목록. 파라미터(parameter)
 	public List<BoardVO> boardList(SearchDTO search) {
 		getConn();
 		String sql = "select b.* " //
