@@ -6,7 +6,7 @@
   String logId = (String) session.getAttribute("logId");
 %>
 <h3>게시글 등록화면(boardForm.jsp)</h3>
-<form action="board.do" method="post">
+<form action="board.do" method="post" enctype="multipart/form-data">
 	<table class="table">
 		<tr>
 			<th>제목</th>
@@ -17,8 +17,11 @@
 			<td><textarea rows="3" class="form-control" cols="25" name="content"></textarea></td>
 		<tr>
 			<th>작성자</th>
-			<td><input type="text" readonly class="form-control" name="writer" value ="<%=logId%>"></td>
+			<td><input type="text" readonly class="form-control" name="writer" value ="${logId }"></td>
 		</tr>
+		<!-- 2024.12.13 -->
+		<th>이미지</th>
+			<td><input type="file" name = "img" class="form-control"></td>
 		<tr>
 			<td colspan="2" align="center"><input type="submit"
 				value="게시글등록"></td>
