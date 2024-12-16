@@ -53,34 +53,48 @@
 
 <!-- 댓글시작. -->
 <style>
-  div.reply .content ul {
-    list-style-type:none;
-  }
-  div.reply .content span {
-    display: inline-block; 
-  }
+div.reply .content ul {
+	list-style-type: none;
+}
+
+div.reply .content span {
+	display: inline-block;
+}
 </style>
 <div class="reply">
 	<div class="header">
-	  댓글내용: <input type="text" id="reply" class="col-sm-8">
-	  <button id="addBtn" class="col-sm-2 btn btn-primary">댓글등록</button>
-	</div> <!-- 댓글등록 -->
+		댓글내용: <input type="text" id="reply" class="col-sm-8">
+		<button id="addBtn" class="col-sm-2 btn btn-primary">댓글등록</button>
+	</div>
+	<!-- 댓글등록 -->
 	<div class="content">
 		<ul class="title">
-			<li><span class="col-sm-2">글번호</span>
-			 	<span class="col-sm-5">내용</span>
-			  	<span class="col-sm-2">작성자</span>
-			   	<span class="col-sm-2">삭제</span>
-			</li>
+			<li><span class="col-sm-2">글번호</span> <span class="col-sm-5">내용</span>
+				<span class="col-sm-2">작성자</span> <span class="col-sm-2">삭제</span></li>
 		</ul>
 		<ul class="list"></ul>
-	</div><!-- 댓글목록 --> 
-  <div class="footer"></div> <!-- 댓글paging -->
+	</div>
+	<!-- 댓글목록 -->
+	<div class="footer">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+	</div> <!-- 댓글paging -->
 </div>
 <!-- 댓글끝. -->
 <script>
-  let bno = "${board.boardNo}" // 원본글번호.
-  let logId = "${logId }"; // 작성자.
+	let bno = "${board.boardNo}" // 원본글번호.
+	let logId = "${logId }"; // 작성자.
 </script>
 <script src="js/board.js"></script>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
