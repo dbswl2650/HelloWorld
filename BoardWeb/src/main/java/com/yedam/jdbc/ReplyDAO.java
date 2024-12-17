@@ -28,6 +28,51 @@ public class ReplyDAO extends DAO {
 			+ "          from tbl_reply " //
 			+ "          group by board_no";
 	
+	public boolean deleteEvent(Map<String, String> map) {
+		getConn();
+		String sql = "delete from tbl_events" 
+				+ "   where title = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, map.get("title"));
+
+			int r = psmt.executeUpdate();
+			if(r > 0) {
+				return true; // 정상처리.
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConnect();
+		}
+		return false;
+	}
+	
+	// 일정등록.
+	public boolean insertEvent(Map<String, String> map) {
+		getConn();
+		String sql = "insert into tbl_events (title, start_date, end_date)" 
+				+ "   values(?, ?, ?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, map.get("title"));
+			psmt.setString(2, map.get("start"));
+			psmt.setString(3, map.get("end"));
+			
+			int r = psmt.executeUpdate(); // 처리된 건수 반환.
+			if(r > 0) {
+				return true; // 정상처리.
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConnect();
+		}
+		return false; // 비정상처리.
+	}
+	
 	// fullcalendar 데이터.
 	public List<Map<String, Object>> calendarData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();

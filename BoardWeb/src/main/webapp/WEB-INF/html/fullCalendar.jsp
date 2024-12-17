@@ -8,47 +8,68 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+	let eventData;
+	// eventData 에 저장하기 fullData.do
+	fetch('fullData.do')
+	  .then(result => result.json())
+	  .then(result => {
+		  // console.log(result);
+		  eventData = result;
+		  var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      initialDate: '2023-01-12',
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      selectMirror: true,
-      select: function(arg) {
-        var title = prompt('Event Title:');
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
-        }
-        calendar.unselect()
-      },
-      eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
-      },
-      editable: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-//        {
-//          title: 'All Day Event',
-//          start: '2023-01-01',
-//          end: '2023-01-05'
-//        }
-      ]
-    });
+		    var calendar = new FullCalendar.Calendar(calendarEl, {
+		      headerToolbar: {
+		        left: 'prev,next today',
+		        center: 'title',
+		        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+		      },
+		      initialDate: '2024-12-16',
+		      navLinks: true, // can click day/week names to navigate views
+		      selectable: true,
+		      selectMirror: true,
+		      select: function(arg) {
+		        var title = prompt('이벤트를 등록하세요.:');
+		        if (title) {
+		          console.log(arg); // arg 확인........
+		          // Ajax 호풀.
+		          fetch('addEvent.do?a='+title+'&b='+arg.startStr+'&c='+arg.endStr)
+		          .then(result => result.json())
+		          .then(result => {
+		        	  if(result.retCode == 'OK') {
+		        	  // 화면출력.
+		                calendar.addEvent({
+		                  title: title,
+		                  start: arg.start,
+		                  end: arg.end,
+		                  allDay: arg.allDay
+		                })
+		              } // end of retCode == 'OK'
+		          })
+		          .catch(err => console.log(err));
+		        }
+		        calendar.unselect()
+		      },
+		      eventClick: function(arg) {
+		        if (confirm('삭제하겠습니까?')) {
+		          arg.event.remove()
+		          fetch('deleteEvent.do?a='+arg.event.title)
+		          .then(result => result.json())
+		          .then(result => {
+		        	 if(result.retCode == 'OK') {
+		        		 console.log("삭제완료되었습니다.")
+		        	 }
+		          })
+		          .catch(err => console.log(err));
+		        }
+		      },
+		      editable: true,
+		      dayMaxEvents: true, // allow "more" link when too many events
+			  events: eventData //  [{},{},{}.....{}]
+		    });
 
-    calendar.render();
+		    calendar.render();
+	  })   
+    .catch(err => console.log(err));
   });
 
 </script>
